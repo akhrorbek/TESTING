@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- CSS only -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+ <link rel="stylesheet" href="../assets/css/main.css"/>
+ <noscript>
+     <link rel="stylesheet" href="../assets/sass/noscript.scss" />
+ </noscript>
+    <title>Complex</title>
+</head>
+<body>
+
+    <section id="sidebar">
+		<div class="inner">
+			<nav>
+				<ul>
+					<li><a href="/admin/companies">Company</a></li>
+					<li><a href="/admin/complexes">Complexes</a></li>
+					<li><a href="/admin/rooms">Rooms</a></li>
+					<li><a href="/admin/banks">Banks</a></li>
+				</ul>
+			</nav>
+		</div>
+	</section>
+
+	<div id="wrapper">
+        <header class="headerWrapper">
+            <h1>Complexes</h1>
+        </header>
+        <section id="three" class="wrapper style2 fade-up">
+            <div class="inner">
+                <h2>Adding Complex</h2>
+                <div class="split style1">
+                    <section>
+                        <form method="post" action="/admin/complexes" enctype="application/x-www-form-urlencoded">
+                            <div class="fields">
+                                <div class="field half">
+                                    <label for="teacher-name">Complex</label>
+                                    <input type="text" name="compx_name" id="compx_name" placeholder="complex name" required />
+                                </div>
+								<div class="field half">
+									<label for="photo">Complex photo link</label>
+									<input type="text"  name="compx_photo" id="compx_photo" placeholder="Complex photo link" required />
+								</div>
+                                <div class="field half">
+                                    <label for="comp-field">Company</label>
+                                    <select name="comp_name" id="comp_name">
+                                        <option disabled selected >Choose company</option>
+                                        <% allCompanies.map(e => {%>
+                                            <option><%=e.comp_name%></option>
+                                        <% });%>
+                                    </select>
+                                </div>
+                            </div>
+                            <ul class="actions">
+                                <button type="submit" class="button submit">Submit</button>
+                            </ul>
+                        </form>
+                    </section>
+                    <section>
+                        <!--Added Complexes -->
+                        <h3 class="teacherTitle text-center">Complexes</h3>
+                        <ul class="teacherList d-flex justify-content-around pt-5">
+                            <% allComplexes.map(e=> {%>
+                                <li class="card bg-primary p-5 rounded-5 mt-5 d-flex flex-column align-items-center">
+                                    <h5 class="text-light"><%=e.compx_name %></h5>
+                                    <h5 class="text-light"><%=e.comp_name %></h5>
+									<img class="mt-3 mb-3" src="<%=e.compx_photo %>"width="220" height="190">
+                                    <button id="<%=e.compx_id %>" onclick="deleteHandleComplex(event)" class="button btn-primary">Delete</button>
+                                </li>
+                            <%}); %>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+    <script src="../assets/app.js"></script>
+</body>
+</html>

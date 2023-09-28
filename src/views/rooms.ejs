@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="../assets/css/main.css"/>
+<noscript>
+    <link rel="stylesheet" href="../assets/sass/noscript.scss" />
+</noscript>
+    <title>Rooms</title>
+</head>
+<body>
+
+    <section id="sidebar">
+		<div class="inner">
+			<nav>
+				<ul>
+					<li><a href="/admin/companies">Company</a></li>
+					<li><a href="/admin/complexes">Complexes</a></li>
+					<li><a href="/admin/rooms">Rooms</a></li>
+					<li><a href="/admin/banks">Banks</a></li>
+				</ul>
+			</nav>
+		</div>
+	</section>
+
+	<div id="wrapper">
+        <header class="headerWrapper">
+            <h1>Rooms</h1>
+        </header>
+        <section id="three" class="wrapper style2 fade-up">
+            <div class="inner">
+                <h2>Adding Rooms</h2>
+                <div class="split style1">
+                    <section>
+                        <form method="post" action="/admin/rooms" enctype="application/x-www-form-urlencoded">
+                            <div class="fields">
+                                <div class="field half">
+                                    <label for="comp-field">Complex</label>
+                                    <select name="compx_name" id="compx_name">
+                                        <option disabled selected >Choose complex</option>
+                                        <% allComplexes.map(e => {%>
+                                            <option><%=e.compx_name%></option>
+                                        <% });%>
+                                    </select>
+                                </div>
+                                <div class="field half">
+                                    <label for="room_name">Room number</label>
+                                    <select name="room_number" id="room_number">
+                                        <option disabled selected>Select room number</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                                <div class="field half">
+                                    <label for="room_size">Room size</label>
+                                    <select name="room_size" id="room_size">
+                                        <option disabled selected>Select room size</option>
+                                        <option value="40">40</option>
+                                        <option value="48">48</option>
+                                        <option value="56">56</option>
+                                        <option value="60">60</option>
+                                        <option value="65">65</option>
+                                    </select>
+                                </div>
+								<div class="field half">
+									<label for="photo">Room cost (square meter)</label>
+									<input type="text"  name="room_cost" id="room_cost" placeholder="Room cost" required />
+								</div>
+                                <div class="field half">
+									<label for="photo">Room photo link</label>
+									<input type="text"  name="room_photo" id="room_photo" placeholder="Room photo" required />
+								</div>
+                            </div>
+                            <ul class="actions">
+                                <button type="submit" class="button submit">Submit</button>
+                            </ul>
+                        </form>
+                    </section>
+
+                    <section>
+                        <h3 class="teacherTitle text-center">Rooms</h3>
+                        <ul class="teacherList d-flex justify-content-around pt-5">
+                            <% allRooms.map(e=> {%>
+                                <li class="card bg-primary p-5 rounded-5 mt-5 d-flex flex-column align-items-center">
+                                    <h5 class="text-light"><%=e.compx_name %></h5>
+                                    <h5 class="text-light">Room number: <%=e.room_number %> rooms</h5>
+                                    <h5 class="text-ligth">Cost: <%=e.room_cost %> UZS</h5>
+                                    <h5 class="text-light">Room size: <%=e.room_size %> sq m</h5>
+                                    <img class="mb-3" src="<%=e.room_photo %>" width="220" height="140">
+                                    <button id="<%=e.room_id %>" onclick="deleteHandleRooms(event)" class="button btn-primary">Delete</button>
+                                </li>
+                            <%}); %>
+                        </ul>
+                    </section>
+
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="../assets/app.js"></script>
+
+</body>
+</html>
